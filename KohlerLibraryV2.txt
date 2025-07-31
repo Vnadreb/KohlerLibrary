@@ -1,0 +1,409 @@
+local ZtIZgqpmPcfTOxjh = nil
+wait()
+MoonSec_StringsHiddenAttr = true
+wait()
+MoonSec_StringsHiddenAttr = true
+
+-- Servisler ve temel ayarlar
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local TextService = game:GetService("TextService")
+
+-- Tema tanımları
+_G.Theme = {
+    Dark = Color3.fromRGB(30, 30, 30),
+    Primary = Color3.fromRGB(110, 110, 120),
+    Secondary = Color3.fromRGB(20, 20, 30)
+}
+
+-- Mevcut GUI'leri temizle
+if CoreGui:FindFirstChild("KOHLERHUB") then
+    CoreGui:FindFirstChild("KOHLERHUB"):Destroy()
+end
+
+if CoreGui:FindFirstChild("ScreenGui") then
+    CoreGui:FindFirstChild("ScreenGui"):Destroy()
+end
+
+-- Ana GUI oluştur
+local HubIcon = Instance.new("ImageButton")
+local MainGui = Instance.new("ScreenGui")
+MainGui.Name = "KOHLERHUB"
+MainGui.Parent = CoreGui
+MainGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+HubIcon.Parent = CoreGui
+HubIcon.Name = "HubIcon"
+HubIcon.Position = UDim2.new(0, 10, 0, 10)
+HubIcon.Size = UDim2.new(0, 50, 0, 50)
+HubIcon.Draggable = true
+HubIcon.BackgroundColor3 = _G.Theme.Secondary
+HubIcon.ImageColor3 = _G.Theme.Primary
+HubIcon.ImageTransparency = 0.1
+HubIcon.BackgroundTransparency = 0.1
+HubIcon.Image = "rbxassetid://13940080072"
+
+local HubIconStroke = Instance.new("UIStroke")
+HubIconStroke.Color = _G.Theme.Primary
+HubIconStroke.Thickness = 1
+HubIconStroke.Transparency = 0
+HubIconStroke.Parent = HubIcon
+
+local HubIconCorner = Instance.new("UICorner")
+HubIconCorner.Name = "MCNR"
+HubIconCorner.Parent = HubIcon
+HubIconCorner.CornerRadius = UDim.new(0, 5)
+
+HubIcon.MouseButton1Click:Connect(function()
+    MainGui.Enabled = not MainGui.Enabled
+end)
+
+-- Ana pencere oluştur
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "Main"
+MainFrame.Parent = MainGui
+MainFrame.ClipsDescendants = true
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = _G.Theme.Secondary
+MainFrame.BackgroundTransparency = 0.1
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.Size = UDim2.new(0, 0, 0, 0)
+
+local MainStroke = Instance.new("UIStroke")
+MainStroke.Color = _G.Theme.Primary
+MainStroke.Thickness = 1
+MainStroke.Transparency = 0
+MainStroke.Parent = MainFrame
+
+local MainCorner = Instance.new("UICorner")
+MainCorner.Name = "CircleMain"
+MainCorner.Parent = MainFrame
+MainCorner.CornerRadius = UDim.new(0, 5)
+
+-- Animasyonla açılma
+TweenService:Create(MainFrame, TweenInfo.new(0.4, Enum.EasingStyle.Quad), {Size = UDim2.new(0, 524, 0, 332)}):Play()
+
+-- Sürükleme butonu
+local DragButton = Instance.new("Frame")
+DragButton.Name = "DragButton"
+DragButton.Parent = MainFrame
+DragButton.AnchorPoint = Vector2.new(1, 1)
+DragButton.Position = UDim2.new(1, -5, 1, -5)
+DragButton.Size = UDim2.new(0, 15, 0, 15)
+DragButton.BackgroundColor3 = _G.Theme.Primary
+DragButton.BackgroundTransparency = 0.1
+DragButton.ZIndex = 10
+
+local DragCorner = Instance.new("UICorner")
+DragCorner.Name = "CircleDragButton"
+DragCorner.Parent = DragButton
+DragCorner.CornerRadius = UDim.new(0, 99)
+
+-- Üst kısım
+local TopBar = Instance.new("Frame")
+TopBar.Name = "Top"
+TopBar.Parent = MainFrame
+TopBar.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+TopBar.Size = UDim2.new(1, 0, 0, 40)
+TopBar.BackgroundTransparency = 1
+
+local TopCorner = Instance.new("UICorner")
+TopCorner.Name = "TCNR"
+TopCorner.Parent = TopBar
+TopCorner.CornerRadius = UDim.new(0, 5)
+
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Name = "ttittles"
+TitleLabel.Parent = TopBar
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Position = UDim2.new(0, 15, 0.5, 0)
+TitleLabel.AnchorPoint = Vector2.new(0, 0.5)
+TitleLabel.Size = UDim2.new(0, 1, 0, 25)
+TitleLabel.Font = Enum.Font.GothamBold
+TitleLabel.Text = "RELZ HUB |"
+TitleLabel.TextSize = 15
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local TitleSize = TextService:GetTextSize(TitleLabel.Text, TitleLabel.TextSize, TitleLabel.Font, Vector2.new(math.huge, math.huge))
+TitleLabel.Size = UDim2.new(0, TitleSize.X, 0, 25)
+
+local PatchLabel = Instance.new("TextLabel")
+PatchLabel.Name = "patch"
+PatchLabel.Parent = TitleLabel
+PatchLabel.BackgroundTransparency = 1
+PatchLabel.Position = UDim2.new(1, 5, 0.5, 0)
+PatchLabel.Size = UDim2.new(0, 1, 0, 25)
+PatchLabel.Font = Enum.Font.Gotham
+PatchLabel.Text = "V1.0"
+PatchLabel.AnchorPoint = Vector2.new(0, 0.5)
+PatchLabel.TextColor3 = _G.Theme.Primary
+PatchLabel.TextTransparency = 0.4
+PatchLabel.TextSize = 13
+PatchLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local PatchSize = TextService:GetTextSize(PatchLabel.Text, PatchLabel.TextSize, PatchLabel.Font, Vector2.new(math.huge, math.huge))
+PatchLabel.Size = UDim2.new(0, PatchSize.X, 0, 25)
+
+local HideButton = Instance.new("ImageButton")
+HideButton.Name = "Hide"
+HideButton.Parent = TopBar
+HideButton.BackgroundColor3 = _G.Theme.Primary
+HideButton.BackgroundTransparency = 1
+HideButton.AnchorPoint = Vector2.new(1, 0.5)
+HideButton.Position = UDim2.new(1, -10, 0.5, 0)
+HideButton.Size = UDim2.new(0, 25, 0, 25)
+HideButton.Image = "rbxassetid://7743878857"
+HideButton.ImageTransparency = 0
+HideButton.ImageColor3 = Color3.fromRGB(245, 245, 245)
+
+local HideCorner = Instance.new("UICorner")
+HideCorner.Name = "MCNR"
+HideCorner.Parent = HideButton
+HideCorner.CornerRadius = UDim.new(0, 3)
+
+HideButton.MouseButton1Click:Connect(function()
+    MainGui.Enabled = false
+end)
+
+-- Tab çerçevesi
+local TabFrame = Instance.new("Frame")
+TabFrame.Name = "Tab"
+TabFrame.Parent = MainFrame
+TabFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+TabFrame.Position = UDim2.new(0, 8, 0, 45)
+TabFrame.BackgroundTransparency = 1
+TabFrame.Size = UDim2.new(0, 148, 0, 275)
+
+local TabScroll = Instance.new("ScrollingFrame")
+TabScroll.Name = "ScrollTab"
+TabScroll.Parent = TabFrame
+TabScroll.Active = true
+TabScroll.BackgroundTransparency = 1
+TabScroll.Position = UDim2.new(0, 0, 0, 0)
+TabScroll.Size = UDim2.new(1, 0, 1, 0)
+TabScroll.ScrollBarThickness = 0
+TabScroll.ScrollingDirection = Enum.ScrollingDirection.Y
+
+local TabCorner = Instance.new("UICorner")
+TabCorner.Parent = TabFrame
+TabCorner.CornerRadius = UDim.new(0, 5)
+
+local TabListLayout = Instance.new("UIListLayout")
+TabListLayout.Name = "PLL"
+TabListLayout.Parent = TabScroll
+TabListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+TabListLayout.Padding = UDim.new(0, 2)
+
+local TabPadding = Instance.new("UIPadding")
+TabPadding.Name = "PPD"
+TabPadding.Parent = TabScroll
+
+-- Sayfa çerçevesi
+local PageFrame = Instance.new("Frame")
+PageFrame.Name = "Page"
+PageFrame.Parent = MainFrame
+PageFrame.BackgroundColor3 = _G.Theme.Secondary
+PageFrame.Position = UDim2.new(0, 166, 0, 45)
+PageFrame.Size = UDim2.new(0, 350, 0, 275)
+PageFrame.BackgroundTransparency = 1
+
+local PageCorner = Instance.new("UICorner")
+PageCorner.Parent = PageFrame
+PageCorner.CornerRadius = UDim.new(0, 3)
+
+local MainPage = Instance.new("Frame")
+MainPage.Name = "MainPage"
+MainPage.Parent = PageFrame
+MainPage.ClipsDescendants = true
+MainPage.BackgroundTransparency = 1
+MainPage.Size = UDim2.new(1, 0, 1, 0)
+
+local PageFolder = Instance.new("Folder")
+PageFolder.Name = "PageList"
+PageFolder.Parent = MainPage
+
+local PageLayout = Instance.new("UIPageLayout")
+PageLayout.Parent = PageFolder
+PageLayout.SortOrder = Enum.SortOrder.LayoutOrder
+PageLayout.EasingDirection = Enum.EasingDirection.InOut
+PageLayout.EasingStyle = Enum.EasingStyle.Quad
+PageLayout.FillDirection = Enum.FillDirection.Vertical
+PageLayout.Padding = UDim.new(0, 10)
+PageLayout.TweenTime = 0
+PageLayout.GamepadInputEnabled = false
+PageLayout.ScrollWheelInputEnabled = false
+PageLayout.TouchInputEnabled = false
+
+-- Sürükleme işlevi
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+DragButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+DragButton.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+-- Pencere fonksiyonu
+local function CreateWindow(title, keybind)
+    PatchLabel.Text = title or "V1.0"
+    local PatchSize = TextService:GetTextSize(PatchLabel.Text, PatchLabel.TextSize, PatchLabel.Font, Vector2.new(math.huge, math.huge))
+    PatchLabel.Size = UDim2.new(0, PatchSize.X, 0, 25)
+    
+    UserInputService.InputBegan:Connect(function(input)
+        if input.KeyCode == (keybind or Enum.KeyCode.Insert) then
+            MainGui.Enabled = not MainGui.Enabled
+        end
+    end)
+    
+    local window = {}
+    
+    function window:Tab(tabName, tabIcon)
+        local TabButton = Instance.new("TextButton")
+        TabButton.Name = tabName .. "Server"
+        TabButton.Parent = TabScroll
+        TabButton.Text = ""
+        TabButton.BackgroundColor3 = _G.Theme.Primary
+        TabButton.BackgroundTransparency = 1
+        TabButton.Size = UDim2.new(1, 0, 0, 35)
+        TabButton.Font = Enum.Font.GothamSemibold
+        TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TabButton.TextSize = 12
+        TabButton.TextTransparency = 0.9
+        
+        local SelectedTab = Instance.new("Frame")
+        SelectedTab.Name = "SelectedTab"
+        SelectedTab.Parent = TabButton
+        SelectedTab.BackgroundColor3 = _G.Theme.Primary
+        SelectedTab.BackgroundTransparency = 1
+        SelectedTab.Size = UDim2.new(0, 3, 0, 0)
+        SelectedTab.Position = UDim2.new(0, 0, 0.5, 0)
+        SelectedTab.AnchorPoint = Vector2.new(0, 0.5)
+        SelectedTab.ZIndex = 4
+        
+        local SelectedCorner = Instance.new("UICorner")
+        SelectedCorner.CornerRadius = UDim.new(0, 100)
+        SelectedCorner.Parent = SelectedTab
+        
+        local TabTitle = Instance.new("TextLabel")
+        TabTitle.Name = "Title"
+        TabTitle.Parent = TabButton
+        TabTitle.BackgroundTransparency = 1
+        TabTitle.Position = UDim2.new(0, 30, 0.5, 0)
+        TabTitle.Size = UDim2.new(0, 100, 0, 30)
+        TabTitle.Font = Enum.Font.GothamSemibold
+        TabTitle.Text = tabName
+        TabTitle.AnchorPoint = Vector2.new(0, 0.5)
+        TabTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TabTitle.TextTransparency = 0.4
+        TabTitle.TextSize = 13
+        TabTitle.TextXAlignment = Enum.TextXAlignment.Left
+        
+        local TabIcon = Instance.new("ImageLabel")
+        TabIcon.Name = "IDK"
+        TabIcon.Parent = TabButton
+        TabIcon.BackgroundTransparency = 1
+        TabIcon.ImageTransparency = 0.3
+        TabIcon.Position = UDim2.new(0, 7, 0.5, 0)
+        TabIcon.Size = UDim2.new(0, 15, 0, 15)
+        TabIcon.AnchorPoint = Vector2.new(0, 0.5)
+        TabIcon.Image = tabIcon or ""
+        
+        local TabButtonCorner = Instance.new("UICorner")
+        TabButtonCorner.CornerRadius = UDim.new(0, 5)
+        TabButtonCorner.Parent = TabButton
+        
+        local TabPage = Instance.new("ScrollingFrame")
+        TabPage.Name = tabName .. "_Page"
+        TabPage.Parent = PageFolder
+        TabPage.Active = true
+        TabPage.BackgroundTransparency = 1
+        TabPage.Position = UDim2.new(0, 0, 0, 0)
+        TabPage.Size = UDim2.new(1, 0, 1, 0)
+        TabPage.ScrollBarThickness = 0
+        TabPage.ScrollingDirection = Enum.ScrollingDirection.Y
+        
+        local PageCorner = Instance.new("UICorner")
+        PageCorner.Parent = TabPage
+        
+        local PagePadding = Instance.new("UIPadding")
+        PagePadding.Parent = TabPage
+        
+        local PageListLayout = Instance.new("UIListLayout")
+        PageListLayout.Parent = TabPage
+        PageListLayout.Padding = UDim.new(0, 3)
+        PageListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        
+        TabButton.MouseButton1Click:Connect(function()
+            for _, v in ipairs(TabScroll:GetChildren()) do
+                if v:IsA("TextButton") then
+                    v.BackgroundTransparency = 1
+                    v:FindFirstChild("SelectedTab").BackgroundTransparency = 1
+                end
+            end
+            TabButton.BackgroundTransparency = 0.8
+            SelectedTab.BackgroundTransparency = 0
+            PageLayout:JumpTo(TabPage)
+        end)
+        
+        local tab = {}
+        
+        function tab:Button(text, callback)
+            local Button = Instance.new("TextButton")
+            Button.Parent = TabPage
+            Button.Text = text
+            Button.BackgroundColor3 = _G.Theme.Primary
+            Button.BackgroundTransparency = 0.8
+            Button.Size = UDim2.new(1, -10, 0, 30)
+            Button.Font = Enum.Font.Gotham
+            Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Button.TextSize = 14
+            
+            local ButtonCorner = Instance.new("UICorner")
+            ButtonCorner.CornerRadius = UDim.new(0, 5)
+            ButtonCorner.Parent = Button
+            
+            Button.MouseButton1Click:Connect(callback)
+            
+            return Button
+        end
+        
+        return tab
+    end
+    
+    return window
+end
+
+return {
+    Window = CreateWindow
+}
